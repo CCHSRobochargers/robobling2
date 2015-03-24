@@ -1,3 +1,4 @@
+
 #include <Adafruit_NeoPixel.h>
 
 #define PIN              6
@@ -16,7 +17,7 @@ byte neoArray[VSTRAND_V][VSTRAND_H] = {
   { __, __, __, __, __, __, __, __, __, __, 17, 18, 19, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __}, //4
   { __, __, __, __, __, __, __, __, __, __, 11, 12, 13, 14, 15, 16, __, __, __, __, __, __, __, __, __, __, __, __}, //5
   { __,  2,  3,  4,  5,  6,  7,  8,  9, 10, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __}, //6
-  {  0, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, 52, 53, 54, 55, 56, 57, 58, 59}, //7
+  { __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, 52, 53, 54, 55, 56, 57, 58, 59}, //7
   {  0, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __, __}, //8
 };
 
@@ -42,6 +43,10 @@ void setup() {
 }
 
 void loop() {
+  
+  //rainbow on a single line
+  rainbow(0, 1, 20);
+  
   // Some example procedures showing how to display to the pixels:
   colorWipe(strip.Color(255,215,0), 50); // Gold
   colorWipe(strip.Color(255, 0, 0), 50); // Red
@@ -72,6 +77,12 @@ void vStrand(int pixel, uint32_t c) {
   }
 }
 
+// Set LEDs in a virtual strand driving physical strands in lines
+void vStrand(int line, int pixel, uint32_t c) {
+  if(neoArray[line][pixel] >= 0)
+    strip.setPixelColor((uint16_t)neoArray[line][pixel], c);
+}
+
 // Fill the dots one after the other with a color
 void colorWipe(uint32_t c, uint8_t wait) {
   for (uint16_t i = 0; i < VSTRAND_H; i++) {
@@ -87,6 +98,33 @@ void rainbow(uint8_t wait) {
   for(j=0; j<256; j++) {
     for(i=0; i<VSTRAND_H; i++) {
       vStrand(i, Wheel((i+j) & 255));
+    }
+    strip.show();
+    delay(wait);
+  }
+}
+
+//rainbow for one line
+void rainbow(int line, uint8_t wait) {
+  uint16_t i, j;
+
+  for(j=0; j<256; j++) {
+    for(i=0; i<VSTRAND_H; i++) {
+      vStrand(line, i, Wheel((i+j) & 255));
+    }
+    strip.show();
+    delay(wait);
+  }
+}
+
+//rainbow for two lines
+void rainbow(int line1, int line2, uint8_t wait) {
+  uint16_t i, j;
+
+  for(j=0; j<256; j++) {
+    for(i=0; i<VSTRAND_H; i++) {
+      vStrand(line1, i, Wheel((i+j) & 255));
+      vStrand(line2, i, Wheel((i+j) & 255));
     }
     strip.show();
     delay(wait);
