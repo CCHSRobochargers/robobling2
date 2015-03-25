@@ -55,7 +55,36 @@ void setup() {
 
 void loop() {
 
-  //LED strips turn on one at a time
+  //LEDs turn on one at a time (and off) for colorWipe
+  
+  //colorWipe random LEDs
+  colorWipe(4, 9, strip.Color(255,215,0), 0); // Gold
+  
+  //color wipe on Robo-
+  //              Chargers
+  colorWipe(0, 1, strip.Color(255,215,0), 50); // Gold
+  
+  //coloWipe for Tower
+  colorWipe(2, strip.Color(255,215,0), 50); // Gold
+  colorWipe(2, 0, 50);
+  
+  //colorWipe for Kicker
+  colorWipe(3, 3, strip.Color(255,215,0), 50); // Gold
+  colorWipe(3, 0, 50);
+  
+  //colorWipe for Game Strategy
+  colorWipe(5, 6, strip.Color(255,215,0), 50); // Gold
+  colorWipe(5, 6, 0, 50);
+  
+  //colorWipe for Autonomous
+  colorWipe(7, 7, strip.Color(255,215,0), 50); // Gold
+  colorWipe(7, 0, 50);
+  
+  //colorWipe for Peripherals
+  colorWipe(8, 8, strip.Color(255,215,0), 50); // Gold
+  colorWipe(8, 0, 50);
+    
+  //LED strips turn on one at a time for rainbow
   
   //random LEDS
   rainbow(4, 9, 5);
@@ -119,6 +148,25 @@ void vStrand(int line, int pixel, uint32_t c) {
 void colorWipe(uint32_t c, uint8_t wait) {
   for (uint16_t i = 0; i < VSTRAND_H; i++) {
       vStrand(i, c);
+      strip.show();
+      delay(wait);
+  }
+}
+
+// colorWipe for 1 line
+void colorWipe(int line, uint32_t c, uint8_t wait) {
+  for (uint16_t i = 0; i < VSTRAND_H; i++) {
+      vStrand(line, i, c);
+      strip.show();
+      delay(wait);
+  }
+}
+
+// colorWipe for 2 lines
+void colorWipe(int line1, int line2, uint32_t c, uint8_t wait) {
+  for (uint16_t i = 0; i < VSTRAND_H; i++) {
+      vStrand(line1, i, c);
+      vStrand(line2, i, c);
       strip.show();
       delay(wait);
   }
