@@ -91,23 +91,48 @@ void loop() {
   
   //rainbow on Robo-
   //           Chargers
-  rainbow(0, 1, 20);
+  rainbow(0, 1, 50);
   
   //rainbow on Tower
-  rainbow(2, 2, 20);
-  
+  rainbow(2, 2, 50);
+ 
   //rainbow on Kicker
-  rainbow(3, 3, 20);
-  
+  rainbow(3, 3, 50);
+ 
   //rainbow on Game Strategy
-  rainbow(5, 6, 20);
-  
+  rainbow(5, 6, 50);
+ 
   //rainbows on Autonomous
-  rainbow(7, 7, 20);
-  
+  rainbow(7, 7, 50);
+ 
   //rainbows on peripherals
-  rainbow(8, 8, 20);
+  rainbow(8, 8, 50);
   
+ //LEDs turn on one at a time for colorWipe (and stay on )
+   colorWipe(strip.Color(0, 0, 0), 50); // start all off
+ 
+  //colorWipe random LEDs
+  colorWipe(4, 9, strip.Color(255,215,0), 0); // Gold
+  
+  //color wipe on Robo-
+  //              Chargers
+  colorWipe(0, 1, strip.Color(255,215,0), 50); // Gold
+  
+  //coloWipe for Tower
+  colorWipe(2, strip.Color(255,215,0), 50); // Gold
+  
+  //colorWipe for Kicker
+  colorWipe(3, 3, strip.Color(255,215,0), 50); // Gold
+
+  //colorWipe for Game Strategy
+  colorWipe(5, 6, strip.Color(255,215,0), 50); // Gold
+
+  //colorWipe for Autonomous
+  colorWipe(7, 7, strip.Color(255,215,0), 50); // Gold
+
+  //colorWipe for Peripherals
+  colorWipe(8, 8, strip.Color(255,215,0), 50); // Gold
+   
   // Some example procedures showing how to display to the pixels:
   colorWipe(strip.Color(255,215,0), 50); // Gold
   colorWipe(strip.Color(255, 0, 0), 50); // Red
