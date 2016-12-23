@@ -7,6 +7,9 @@
 #define VSTRAND_V	10
 #define VSTRAND_H	71
 
+// 0 = dark, 255 = full brightness
+int  brightness = 32;
+
 #define			__ ((byte)-1)	/* More visible fillers */
 
 byte neoArray[VSTRAND_V][VSTRAND_H] = {
@@ -132,7 +135,9 @@ void loop() {
   //colorWipe for Peripherals
   colorWipe(8, 8, strip.Color(255,215,0), 50); // Gold
 #endif
-   
+
+  strip.setBrightness(brightness);
+
   // Some example procedures showing how to display to the pixels:
   colorWipe(strip.Color(255,215,0), 50); // Gold
   colorWipe(strip.Color(255, 0, 0), 50); // Red
